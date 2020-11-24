@@ -24,6 +24,32 @@ class RepositoryControllerTest extends TestCase
         $this->post('repositories', [])->assertRedirect('login');   // store
     }
 
+    public function test_index_empty()
+    {
+        Repository::factory()->create(); // user_id = 1
+
+        $user = User::factory()->create(); // id = 2
+
+        $this
+            ->actingAs($user)
+            ->get('repositories')
+            ->assertStatus(200)
+            ->assertSee('No hay repositorios creados');
+    }
+
+    public function test_index_with_data()
+    {
+        $user = User::factory()->create(); // id = 1
+        $repository = Repository::factory()->create(['user_id' => $user->id]); // user_id = 1
+
+        $this
+            ->actingAs($user)
+            ->get('repositories')
+            ->assertStatus(200)
+            ->assertSee($repository->id)
+            ->assertSee($repository->url);
+    }
+
     public function test_store()
     {
         $data = [
