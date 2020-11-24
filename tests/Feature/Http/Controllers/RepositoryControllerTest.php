@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use App\Models\User;
+use App\Models\Repository;
 
 class RepositoryControllerTest extends TestCase
 {
@@ -36,6 +37,24 @@ class RepositoryControllerTest extends TestCase
             ->actingAs($user)
             ->post('repositories', $data)
             ->assertRedirect('repositories');
+
+        $this->assertDatabaseHas('repositories', $data);
+    }
+
+    public function test_update()
+    {
+        $repository = Repository::factory()->create();
+        $data = [
+            'url' => $this->faker->url,
+            'description' => $this->faker->text,
+        ];
+
+        $user = User::factory()->create();
+
+        $this
+            ->actingAs($user)
+            ->put("repositories/$repository->id", $data)
+            ->assertRedirect("repositories/$repository->id/edit");
 
         $this->assertDatabaseHas('repositories', $data);
     }
