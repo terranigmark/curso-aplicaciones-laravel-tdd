@@ -14,6 +14,7 @@
                             <th>ID</th>
                             <th>Enlace</th>
                             <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,10 +27,15 @@
                                     Ver
                                 </a>
                             </td>
+                            <td class="px-4 py-2">
+                                <a href="{{ route('repositories.edit', $repository) }}">
+                                    Editar
+                                </a>
+                            </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3">No hay repositorios creados</td>
+                            <td colspan="4">No hay repositorios creados</td>
                         </tr>
                         @endforelse
                     </tbody>
