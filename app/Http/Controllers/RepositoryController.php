@@ -25,6 +25,10 @@ class RepositoryController extends Controller
             'url' => 'required',
             'description' => 'required',
         ]);
+
+        if ($request->user()->id != $repository->user_id) {
+            abort(403);
+        }
         
         $repository->update($request->all());
 
