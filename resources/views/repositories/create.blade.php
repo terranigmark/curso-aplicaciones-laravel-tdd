@@ -8,19 +8,18 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
-                <form action="{{ route('repositories.update', $repository) }}" method="POST" class="max-w-mg">
+                <form action="{{ route('repositories.store') }}" method="POST" class="max-w-mg">
                     @csrf 
-                    @method('PUT')
 
                     <label class="block font-medium text-sm text-gray-700">URL *</label>
-                    <input class="form-input w-full rounded-md shadow-sm" type="text" name="url" value="{{ $repository->url }}">
+                    <input class="form-input w-full rounded-md shadow-sm" type="text" name="url">
 
                     <label class="block font-medium text-sm text-gray-700">Descripción *</label>
-                    <textarea class="form-input w-full rounded-md shadow-sm" type="text" name="description">{{ $repository->description }}</textarea>
+                    <textarea class="form-input w-full rounded-md shadow-sm" type="text" name="description"></textarea>
                     
                     <hr class="my-4">
 
-                    <input type="submit" value="Editar" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">
+                    <input type="submit" value="Guardar" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">
                 </form>
             </div>
         </div>

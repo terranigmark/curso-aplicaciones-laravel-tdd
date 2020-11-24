@@ -23,6 +23,11 @@ class RepositoryController extends Controller
         return view('repositories.show', compact('repository'));
     }
 
+    public function create()
+    {
+        return view('repositories.create');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
